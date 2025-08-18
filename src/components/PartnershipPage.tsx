@@ -350,7 +350,7 @@ Gostaria de entender como funciona o modelo de parceria e quais são os próximo
                 <motion.button
                   onClick={handleContactPartnership}
                   disabled={isFormSubmitting}
-                  className="bg-white text-midnight font-display font-semibold text-lg px-10 py-5 rounded-full hover:bg-silver hover:scale-105 transition-all duration-300 shadow-2xl disabled:opacity-50 border-2 border-white/20"
+                  className="btn-primary text-lg px-8 py-4 sheen-effect disabled:opacity-50 font-display font-semibold text-lg px-10 py-5 rounded-full hover:bg-silver hover:scale-105 transition-all duration-300 shadow-2xl disabled:opacity-50 border-2 border-white/20"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
