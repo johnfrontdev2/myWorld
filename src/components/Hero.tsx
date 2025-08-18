@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
             <div delay={0.1} direction="up" className="mb-8">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-silver shadow-lg">
                 <span className="text-sm font-medium text-midnight tracking-wide font-display">
-                  Digital Architecta
+                  Digital Architect
                 </span>
               </div>
             </div>
