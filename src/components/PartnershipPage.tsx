@@ -397,7 +397,7 @@ Quero entender os próximos passos e como podemos começar.
           <motion.h2 {...fadeUp} transition={{ duration: 0.7 }} className="text-3xl md:text-4xl lg:text-5xl font-display font-black text-obsidian font-bold mb-6 leading-tight">
             Quer testar com um <span className="text-brand-light">projeto piloto?</span>
           </motion.h2>
-          <motion.p {...fadeUp} transition={{ duration: 0.7, delay: 0.15 }} className="text-xl text-silver font-light max-w-3xl mx-auto mb-8 leading-relaxed">
+          <motion.p {...fadeUp} transition={{ duration: 0.7, delay: 0.15 }} className="text-xl text-gunmetal font-light max-w-3xl mx-auto mb-8 leading-relaxed">
             Envie o briefing de um cliente, receba a landing em até 48h e revenda com sua marca.
           </motion.p>
 
