@@ -245,7 +245,7 @@ const Sites: React.FC = () => {
     {
       id: 'jiu-jitsu',
       title: 'Jiu-jítsu Academy',
-      description: 'Academy specialized in Jiu-Jitsu, intense training, discipline and guaranteed evolution, on the mat and in life.',
+      description: 'Intense training, discipline and guaranteed evolution, on the mat and in life.',
       category: 'web',
       image: 'https://images.pexels.com/photos/7045756/pexels-photo-7045756.jpeg',
       url: 'https://jitsussss.netlify.app/',
