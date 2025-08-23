@@ -108,7 +108,7 @@ Quero entender os próximos passos e como podemos começar.
               sequence={['Sites em até 48h', 1000, 'Landings em até 48h', 2000]}
               wrapper="span"
               speed={50}
-              repeat={Infinity}
+              repeat={Infinity} 
             />
             <br />
             <span className="text-midnight"> para seus clientes</span>
