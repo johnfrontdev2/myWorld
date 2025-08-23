@@ -102,7 +102,7 @@ Quero entender os próximos passos e como podemos começar.
           </span>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black mb-8 text-obsidian leading-none mt-6">
-            Landing Pages em até 48h
+            Sites em até 48h
             <br />
             <span className="text-midnight">prontas para você revender</span>
           </h1>
