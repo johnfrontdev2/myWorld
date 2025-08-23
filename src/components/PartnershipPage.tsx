@@ -303,7 +303,7 @@ Quero entender os próximos passos e como podemos começar.
                   <div className="text-sm text-gunmetal mt-1">{projects} projeto(s)/mês</div>
                 </div>
 
-                <div className="flex items-center justify-between gap-4">
+                <div className="hidden flex items-center justify-between gap-4">
                   <label className="text-sm text-gunmetal flex items-center gap-2">
                     <input
                       type="checkbox"
