@@ -394,7 +394,7 @@ Quero entender os próximos passos e como podemos começar.
       {/* CTA Final */}
       <section className="py-20 lg:py-28 bg-gradient-to-br from-midnight/95 via-midnight to-obsidian text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.h2 {...fadeUp} transition={{ duration: 0.7 }} className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 leading-tight">
+          <motion.h2 {...fadeUp} transition={{ duration: 0.7 }} className="text-3xl md:text-4xl lg:text-5xl font-display font-black text-obsidian font-bold mb-6 leading-tight">
             Quer testar com um <span className="text-brand-light">projeto piloto?</span>
           </motion.h2>
           <motion.p {...fadeUp} transition={{ duration: 0.7, delay: 0.15 }} className="text-xl text-silver font-light max-w-3xl mx-auto mb-8 leading-relaxed">
