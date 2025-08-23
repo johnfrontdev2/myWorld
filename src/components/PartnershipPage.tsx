@@ -105,7 +105,7 @@ Quero entender os próximos passos e como podemos começar.
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black mb-8 text-obsidian leading-none mt-6">
             <TypeAnimation
-              sequence={['Sites em até 48h', 1000, 'Landing Pages em até 48h', 2000]}
+              sequence={['Sites em até 48h', 1000, 'Landings em até 48h', 2000]}
               wrapper="span"
               speed={50}
               repeat={Infinity}
