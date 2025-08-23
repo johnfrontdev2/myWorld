@@ -232,7 +232,7 @@ Quero entender os próximos passos e como podemos começar.
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-xl text-silver font-light max-w-3xl mx-auto mb-8 leading-relaxed"
+            className="text-xl text-gunmetal font-light max-w-3xl mx-auto mb-8 leading-relaxed"
           >
             Envie o briefing de um cliente, receba a landing em até 48h e revenda com sua marca.
           </motion.p>
