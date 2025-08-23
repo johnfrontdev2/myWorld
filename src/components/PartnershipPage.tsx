@@ -104,7 +104,7 @@ Quero entender os próximos passos e como podemos começar.
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black mb-8 text-obsidian leading-none mt-6">
             Sites em até 48h
             <br />
-            <span className="text-midnight"> para sua agência</span>
+            <span className="text-midnight"> para seus clientes</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-gunmetal font-light leading-relaxed mb-12 max-w-3xl mx-auto">
