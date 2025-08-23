@@ -223,7 +223,7 @@ Quero entender os próximos passos e como podemos começar.
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight font-black text-white"
+            className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight font-black  text-obsidian"
           >
             Quer testar com um <span className="text-midnight">projeto piloto?</span>
           </motion.h2>
