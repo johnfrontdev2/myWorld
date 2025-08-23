@@ -252,7 +252,7 @@ Quero entender os próximos passos e como podemos começar.
           <p className="text-sm text-silver font-medium mt-6">
             📱 Conversa direta via WhatsApp • Resposta em até 2h
           </p>
-          <p className="text-xs text-silver/70 font-light mt-2">
+          <p className="text-xs text-silver/90 font-light mt-2">
             Garantia: se atrasar, 20% de desconto imediato.
           </p>
         </div>
