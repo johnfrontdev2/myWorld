@@ -41,7 +41,7 @@ const Header: React.FC = () => {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100);
+      }, 400);
     } else {
       // Se já estamos na página inicial, rolar diretamente
       const element = document.getElementById(sectionId);
