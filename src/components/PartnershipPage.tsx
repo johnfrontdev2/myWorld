@@ -76,7 +76,7 @@ Quero entender os próximos passos e como podemos começar.
       icon: TrendingUp,
       title: 'Mais Lucro para sua Agência',
       description:
-        'Revenda com sua marca e defina sua margem. Sem custo fixo — você só paga quando vende.',
+        'Revenda com sua marca e defina sua margem.',
       highlight: 'Margem 3x a 5x',
     },
     {
