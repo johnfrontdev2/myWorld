@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Users, TrendingUp, Clock, Shield, Zap, CheckCircle, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 import Header from './Header';
 
 const PartnershipPage: React.FC = () => {
@@ -102,23 +104,36 @@ Quero entender os próximos passos e como podemos começar.
           </span>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black mb-8 text-obsidian leading-none mt-6">
-            Sites em até 48h
+            <TypeAnimation
+              sequence={['Sites em até 48h', 1000, 'Landing Pages em até 48h', 2000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
             <br />
             <span className="text-midnight"> para seus clientes</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gunmetal font-light leading-relaxed mb-12 max-w-3xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-xl md:text-2xl text-gunmetal font-light leading-relaxed mb-12 max-w-3xl mx-auto"
+          >
             Você fecha clientes, eu entrego. Mais velocidade, mais lucro e zero peso operacional para sua agência.
-          </p>
+          </motion.p>
 
-          <button
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
             onClick={handleContactPartnership}
             disabled={isFormSubmitting}
             className="btn-primary text-lg px-8 py-4 disabled:opacity-50 inline-flex items-center justify-center"
           >
             {isFormSubmitting ? 'Abrindo conversa...' : 'Quero testar'}
             <ArrowRight className="w-5 h-5 ml-3" />
-          </button>
+          </motion.button>
         </div>
       </section>
 
@@ -135,14 +150,21 @@ Quero entender os próximos passos e como podemos começar.
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step) => (
-              <div key={step.number} className="text-center">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
                 <div className="w-16 h-16 bg-midnight text-white rounded-2xl flex items-center justify-center font-display font-bold text-lg mb-4 mx-auto">
                   {step.number}
                 </div>
                 <h4 className="text-lg font-display font-semibold text-obsidian mb-3">{step.title}</h4>
                 <p className="text-gunmetal text-sm leading-relaxed">{step.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -161,8 +183,15 @@ Quero entender os próximos passos e como podemos começar.
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="card-elevated p-8 h-full">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={benefit.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="card-elevated p-8 h-full"
+              >
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 bg-gradient-to-br from-steel-highlight/20 to-silver/20 rounded-2xl flex items-center justify-center border border-silver/30 flex-shrink-0">
                     <benefit.icon className="w-7 h-7 text-midnight" />
@@ -181,7 +210,7 @@ Quero entender os próximos passos e como podemos começar.
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -190,21 +219,35 @@ Quero entender os próximos passos e como podemos começar.
       {/* CTA Final */}
       <section className="py-20 lg:py-32 bg-gradient-to-br from-midnight/95 via-midnight to-obsidian">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight font-black  text-obsidian">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight font-black text-white"
+          >
             Quer testar com um <span className="text-midnight">projeto piloto?</span>
-          </h2>
-          <p className="text-xl text-gunmetal font-light max-w-3xl mx-auto mb-8 leading-relaxed">
-              Envie o briefing de um cliente, receba a landing em até 48h e revenda com sua marca.
-            </p>
+          </motion.h2>
 
-          <button
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-xl text-silver font-light max-w-3xl mx-auto mb-8 leading-relaxed"
+          >
+            Envie o briefing de um cliente, receba a landing em até 48h e revenda com sua marca.
+          </motion.p>
+
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             onClick={handleContactPartnership}
             disabled={isFormSubmitting}
             className="btn-primary text-lg px-10 py-5 rounded-full disabled:opacity-50 inline-flex items-center justify-center"
           >
             {isFormSubmitting ? 'Abrindo conversa...' : 'Quero reservar'}
             <ArrowRight className="inline-block w-5 h-5 ml-3" />
-          </button>
+          </motion.button>
 
           <p className="text-sm text-silver font-medium mt-6">
             📱 Conversa direta via WhatsApp • Resposta em até 2h
