@@ -116,7 +116,7 @@ Quero entender os próximos passos e como podemos começar.
             disabled={isFormSubmitting}
             className="btn-primary text-lg px-8 py-4 disabled:opacity-50 inline-flex items-center justify-center"
           >
-            {isFormSubmitting ? 'Abrindo conversa...' : 'Quero testar agora'}
+            {isFormSubmitting ? 'Abrindo conversa...' : 'Quero testar'}
             <ArrowRight className="w-5 h-5 ml-3" />
           </button>
         </div>
