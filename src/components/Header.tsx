@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,75 +29,54 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize]);
 
-  // Função para fazer scroll para uma seção específica
+  // Função para fazer scroll suave para uma seção
   const scrollToElement = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return true;
-    }
-    return false;
+    const attemptScroll = (attempts = 0) => {
+      const element = document.getElementById(sectionId);
+      
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      
+      // Tenta novamente se não encontrou o elemento (até 50 tentativas = 5 segundos)
+      if (attempts < 50) {
+        setTimeout(() => attemptScroll(attempts + 1), 100);
+      }
+    };
+    
+    attemptScroll();
   }, []);
 
-  // Função para aguardar o elemento aparecer na DOM
-  const waitForElement = useCallback((sectionId: string, maxAttempts = 20): Promise<boolean> => {
-    return new Promise((resolve) => {
-      let attempts = 0;
-      
-      const checkElement = () => {
-        attempts++;
-        const element = document.getElementById(sectionId);
-        
-        if (element) {
-          resolve(true);
-        } else if (attempts < maxAttempts) {
-          setTimeout(checkElement, 100);
-        } else {
-          resolve(false);
-        }
-      };
-      
-      checkElement();
-    });
-  }, []);
-
-  // Efeito para executar scroll pendente quando chegar na página inicial
+  // Escuta mudanças na URL para fazer scroll quando necessário
   useEffect(() => {
-    if (location.pathname === '/' && pendingScroll) {
-      const executePendingScroll = async () => {
-        // Aguarda o elemento estar disponível na DOM
-        const elementFound = await waitForElement(pendingScroll);
-        
-        if (elementFound) {
-          // Pequeno delay adicional para garantir renderização completa
-          setTimeout(() => {
-            scrollToElement(pendingScroll);
-          }, 50);
-        }
-        
-        setPendingScroll(null);
-      };
+    // Verifica se há um hash na URL (#section) quando chega na home
+    if (location.pathname === '/' && location.hash) {
+      const sectionId = location.hash.substring(1); // Remove o #
       
-      executePendingScroll();
+      // Aguarda um pouco para garantir que a página foi renderizada
+      setTimeout(() => {
+        scrollToElement(sectionId);
+      }, 300);
     }
-  }, [location.pathname, pendingScroll, waitForElement, scrollToElement]);
+  }, [location.pathname, location.hash, scrollToElement]);
 
   const scrollToSection = useCallback((sectionId: string) => {
     setIsMobileMenuOpen(false);
     
-    // Se não estamos na página inicial, navegar primeiro e definir scroll pendente
+    // Se não estamos na página inicial, navegar com hash
     if (location.pathname !== '/') {
-      setPendingScroll(sectionId);
-      navigate('/');
+      navigate(`/#${sectionId}`);
     } else {
-      // Se já estamos na página inicial, rolar diretamente
+      // Se já estamos na página inicial, fazer scroll direto e atualizar URL
       scrollToElement(sectionId);
+      // Atualiza a URL com o hash sem causar reload
+      window.history.pushState(null, '', `/#${sectionId}`);
     }
   }, [location.pathname, navigate, scrollToElement]);
 
   const navigateToPage = useCallback((path: string) => {
     setIsMobileMenuOpen(false);
-    setPendingScroll(null); // Limpar qualquer scroll pendente
     navigate(path);
   }, [navigate]);
 
