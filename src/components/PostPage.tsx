@@ -172,13 +172,12 @@ const PostPage: React.FC = () => {
           
           <motion.div 
             className="flex flex-wrap gap-2"
-                  // Aguardar a navegação e então rolar para o contato
-                  setTimeout(() => {
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                  }, 200);
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.0 }}
+          >
+            {post.tags.map((tag, index) => (
+              <span
                 key={index}
                 className="inline-flex items-center px-3 py-1 bg-brand-light text-brand-secondary text-sm rounded-full"
               >
@@ -213,6 +212,7 @@ const PostPage: React.FC = () => {
             <AnimatedButton
               onClick={() => {
                 navigate('/');
+                // Wait for navigation and then scroll to contact
                 setTimeout(() => {
                   const contactSection = document.getElementById('contact');
                   if (contactSection) {
