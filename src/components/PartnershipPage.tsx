@@ -193,9 +193,9 @@ Quero entender os próximos passos e como podemos começar.
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight font-black  text-obsidian">
             Quer testar com um <span className="text-midnight">projeto piloto?</span>
           </h2>
-          <p className="text-xl text-gunmetal  leading-relaxed mb-12 text-silver">
-            Envie o briefing de um cliente, receba a landing em até 48h e revenda com sua marca.
-          </p>
+          <p className="text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
+              Mais lucro, mais velocidade, menos dor de cabeça. Você cuida do cliente, eu cuido da entrega.
+            </p>
 
           <button
             onClick={handleContactPartnership}
