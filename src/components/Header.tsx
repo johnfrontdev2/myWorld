@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 50);
@@ -27,17 +30,31 @@ const Header: React.FC = () => {
   }, [handleResize]);
 
   const scrollToSection = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+    setIsMobileMenuOpen(false);
+    
+    // Se não estamos na página inicial, navegar primeiro
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Aguardar a navegação e então rolar
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      // Se já estamos na página inicial, rolar diretamente
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
-  }, []);
+  }, [location.pathname, navigate]);
 
   const navigateToPage = useCallback((path: string) => {
-    window.location.href = path;
     setIsMobileMenuOpen(false);
-  }, []);
+    navigate(path);
+  }, [navigate]);
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(prev => !prev);

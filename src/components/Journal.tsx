@@ -2,11 +2,13 @@ import React from 'react';
 import ScrollReveal from './ScrollReveal';
 import { motion } from 'framer-motion';
 import { posts } from '../data/posts';
+import { useNavigate } from 'react-router-dom';
 
 const Journal: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleNavigate = (path: string) => {
-    // Navegação nativa usando window.location
-    window.location.href = path;
+    navigate(path);
   };
 
   return (
