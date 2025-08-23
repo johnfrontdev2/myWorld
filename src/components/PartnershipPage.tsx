@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, TrendingUp, Clock, Shield, Zap, CheckCircle, ArrowRight, Layout } from 'lucide-react';
+import { Users, TrendingUp, Clock, Shield, Zap, CheckCircle, ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import PageTransition from './PageTransition';
 import Header from './Header';
@@ -14,28 +14,28 @@ const PartnershipPage: React.FC = () => {
 
   const handleContactPartnership = useCallback(() => {
     setIsFormSubmitting(true);
-    
+
     const whatsappMessage = encodeURIComponent(`🤝 *Parceria para Agências*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-👋 Olá! Tenho interesse em conversar sobre como funciona o modelo de parceria de landings rápidas.
+👋 Olá! Tenho interesse em conhecer melhor como funciona a parceria de landings rápidas.
 
-🎯 *Interesse:*
+🎯 *Interesse:*  
 Quero entender os próximos passos e como podemos começar.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📅 *Enviado em:* ${new Date().toLocaleString('pt-BR', {
       day: '2-digit',
-      month: '2-digit', 
+      month: '2-digit',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
       timeZone: 'America/Sao_Paulo'
     })}
 🌐 *Via:* johnnightsteel.com/parceria`);
-    
+
     const whatsappUrl = `https://wa.me/557132159293?text=${whatsappMessage}`;
-    
+
     setTimeout(() => {
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
       setIsFormSubmitting(false);
@@ -46,26 +46,26 @@ Quero entender os próximos passos e como podemos começar.
     {
       icon: TrendingUp,
       title: 'Mais Lucro para sua Agência',
-      description: 'Revenda landings com a sua marca e defina a margem que quiser. Zero custo fixo, só paga quando vende.',
-      highlight: '+40% de margem'
+      description: 'Revenda landings com a sua marca e defina a margem que quiser. Sem custo fixo, só paga quando vende.',
+      highlight: 'Margem 3x a 5x'
     },
     {
       icon: Clock,
       title: 'Entrega em Até 48h',
-      description: 'Você envia o briefing, eu desenvolvo e te entrego a landing pronta para o cliente em até 48 horas.',
+      description: 'Você envia o briefing, eu desenvolvo e entrego a landing pronta em até 48 horas.',
       highlight: 'Velocidade garantida'
     },
     {
       icon: Zap,
-      title: 'Sem Peso Operacional',
-      description: 'Esqueça dores com equipe, prazo ou execução. Você foca em fechar clientes, eu cuido da entrega.',
-      highlight: 'Zero estresse'
+      title: 'Zero Peso Operacional',
+      description: 'Nada de dor com equipe, prazos ou execução. Você foca em fechar clientes, eu cuido da entrega.',
+      highlight: 'Escalabilidade real'
     },
     {
       icon: Shield,
       title: 'Suporte e Qualidade',
-      description: 'Todas as entregas passam por revisão técnica + 30 dias de suporte para ajustes rápidos.',
-      highlight: '100% confiável'
+      description: 'Todas as entregas passam por revisão + 30 dias de suporte para ajustes simples.',
+      highlight: 'Confiança total'
     }
   ];
 
@@ -73,22 +73,22 @@ Quero entender os próximos passos e como podemos começar.
     {
       number: '01',
       title: 'Você envia o briefing',
-      description: 'Me passa o que o cliente precisa em alguns pontos-chave.'
+      description: 'Basta passar o que o cliente precisa em alguns pontos-chave.'
     },
     {
       number: '02',
       title: 'Eu desenvolvo',
-      description: 'Executo todo o desenvolvimento e deixo a landing pronta.'
+      description: 'Executo o projeto e deixo a landing pronta para uso.'
     },
     {
       number: '03',
       title: 'Entrega em até 48h',
-      description: 'Você recebe o projeto pronto para entregar ao cliente.'
+      description: 'Você recebe o material pronto para entregar ao cliente.'
     },
     {
       number: '04',
       title: 'Você revende',
-      description: 'Apresente como sendo da sua agência, com a margem que quiser.'
+      description: 'Entrega como sendo da sua agência, no valor que quiser.'
     }
   ];
 
@@ -109,15 +109,15 @@ Quero entender os próximos passos e como podemos começar.
 
             <ScrollReveal direction="up" delay={0.3}>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black mb-8 text-obsidian leading-none">
-                Landings em até 48h
+                Landing Pages em até 48h
                 <br />
-                <span className="text-midnight">para você revender com sua marca</span>
+                <span className="text-midnight">prontas para você revender</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.4}>
               <p className="text-xl md:text-2xl text-gunmetal font-light leading-relaxed mb-12 max-w-3xl mx-auto">
-                Você fecha clientes, eu entrego. Zero peso de operação, mais lucro e mais velocidade para sua agência.
+                Você fecha clientes, eu entrego. Mais velocidade, mais lucro e zero peso operacional para sua agência.
               </p>
             </ScrollReveal>
 
@@ -129,7 +129,7 @@ Quero entender os próximos passos e como podemos começar.
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isFormSubmitting ? 'Abrindo conversa...' : 'Quero testar a parceria'}
+                {isFormSubmitting ? 'Abrindo conversa...' : 'Quero testar agora'}
                 <ArrowRight className="w-5 h-5 ml-3" />
               </motion.button>
             </ScrollReveal>
@@ -148,7 +148,7 @@ Quero entender os próximos passos e como podemos começar.
 
               <ScrollReveal direction="up" delay={0.3}>
                 <p className="text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
-                  O processo é simples: você manda o briefing, eu entrego em até 48h, você apresenta como seu.
+                  Simples: você manda o briefing, eu entrego em até 48h e você apresenta como seu.
                 </p>
               </ScrollReveal>
             </div>
@@ -175,12 +175,12 @@ Quero entender os próximos passos e como podemos começar.
             <div className="text-center mb-16">
               <ScrollReveal direction="up" delay={0.2}>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-obsidian">
-                  Por que sua agência vai lucrar mais?
+                  Por que sua agência vai escalar mais?
                 </h2>
               </ScrollReveal>
               <ScrollReveal direction="up" delay={0.3}>
                 <p className="text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
-                  Velocidade, simplicidade e margem maior. Você cuida do cliente, eu cuido da entrega.
+                  Mais lucro, mais velocidade, menos dor de cabeça. Você cuida do cliente, eu cuido da entrega.
                 </p>
               </ScrollReveal>
             </div>
@@ -244,6 +244,9 @@ Quero entender os próximos passos e como podemos começar.
               </motion.button>
               <p className="text-sm text-silver font-medium mt-6">
                 📱 Conversa direta via WhatsApp • Resposta em até 2h
+              </p>
+              <p className="text-xs text-silver/70 font-light mt-2">
+                Garantia: se atrasar, 20% de desconto imediato.
               </p>
             </ScrollReveal>
           </div>
