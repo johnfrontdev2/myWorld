@@ -254,7 +254,7 @@ Quero entender os próximos passos e como podemos começar.
       </section>
 
       {/* Simulador de Lucro Avançado */}
-      <section className="py-24 bg-gradient-to-b from-brand-light/10 via-white to-brand-light/5">
+      <section className="py-18 bg-gradient-to-b from-brand-light/10 via-white to-brand-light/5">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-10 items-stretch">
             {/* Painel de controles */}
