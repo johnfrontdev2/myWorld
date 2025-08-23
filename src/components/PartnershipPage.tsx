@@ -190,7 +190,7 @@ Quero entender os próximos passos e como podemos começar.
       {/* CTA Final */}
       <section className="py-20 lg:py-32 bg-gradient-to-br from-midnight/95 via-midnight to-obsidian">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 leading-tight font-black  text-obsidian">
             Quer testar com um projeto piloto?
           </h2>
           <p className="text-xl font-light leading-relaxed mb-12 text-silver">
