@@ -6,6 +6,7 @@ import Header from './Header';
 
 const PartnershipPage: React.FC = () => {
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+  const [price, setPrice] = useState<number | ''>('');
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,27 +70,14 @@ Quero entender os próximos passos e como podemos começar.
   ];
 
   const processSteps = [
-    {
-      number: '01',
-      title: 'Você envia o briefing',
-      description: 'Basta passar o que o cliente precisa em alguns pontos-chave.'
-    },
-    {
-      number: '02',
-      title: 'Eu desenvolvo',
-      description: 'Executo o projeto e deixo a landing pronta para uso.'
-    },
-    {
-      number: '03',
-      title: 'Entrega em até 48h',
-      description: 'Você recebe o material pronto para entregar ao cliente.'
-    },
-    {
-      number: '04',
-      title: 'Você revende',
-      description: 'Entrega como sendo da sua agência, no valor que quiser.'
-    }
+    { number: '01', title: 'Você envia o briefing', description: 'Basta passar o que o cliente precisa em alguns pontos-chave.' },
+    { number: '02', title: 'Eu desenvolvo', description: 'Executo o projeto e deixo a landing pronta para uso.' },
+    { number: '03', title: 'Entrega em até 48h', description: 'Você recebe o material pronto para entregar ao cliente.' },
+    { number: '04', title: 'Você revende', description: 'Entrega como sendo da sua agência, no valor que quiser.' }
   ];
+
+  const cost = 299;
+  const lucro = typeof price === 'number' && price > 0 ? price - cost : null;
 
   return (
     <div className="min-h-screen bg-white">
@@ -108,7 +96,7 @@ Quero entender os próximos passos e como podemos começar.
               sequence={['Sites em até 48h', 1000, 'Landings em até 48h', 2000]}
               wrapper="span"
               speed={50}
-              repeat={Infinity} 
+              repeat={Infinity}
             />
             <br />
             <span className="text-midnight"> para seus clientes</span>
@@ -213,6 +201,51 @@ Quero entender os próximos passos e como podemos começar.
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Simulador de Lucro */}
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-brand-light/10 via-white to-brand-light/5">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl md:text-4xl font-display font-bold mb-6 text-obsidian"
+          >
+            🔢 Simule seu lucro agora
+          </motion.h2>
+
+          <p className="text-lg text-gunmetal mb-8">
+            Digite quanto você cobra por uma landing page e veja o lucro líquido estimado.
+          </p>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <input
+              type="number"
+              placeholder="Ex: 1200"
+              value={price}
+              onChange={(e) => setPrice(e.target.value ? parseInt(e.target.value) : '')}
+              className="border border-silver rounded-xl px-4 py-3 text-lg w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-midnight"
+            />
+            <span className="text-lg text-gunmetal">R$</span>
+          </div>
+
+          {lucro !== null && lucro > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mt-8 p-6 bg-green-50 border border-green-200 rounded-2xl"
+            >
+              <p className="text-xl font-semibold text-green-800">
+                Seu lucro estimado: <span className="font-black">R${lucro}</span>
+              </p>
+              <p className="text-sm text-green-700 mt-2">
+                (Custo fixo por projeto: R${cost})
+              </p>
+            </motion.div>
+          )}
         </div>
       </section>
 
