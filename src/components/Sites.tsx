@@ -243,6 +243,15 @@ const Sites: React.FC = () => {
       tags: ['Real Estate', 'Architecture', 'Dubai', 'Property']
     },
     {
+      id: 'jiu-jitsu',
+      title: 'Jiu-jítsu Academy',
+      description: 'B2B SaaS platform with conversion-focused design and user experience',
+      category: 'web',
+      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg',
+      url: '#',
+      tags: ['SaaS', 'B2B', 'Technology', 'Platform']
+    },
+    {
       id: 'fashion-editorial',
       title: 'Editorial Fashion',
       description: 'High-fashion brand identity with editorial storytelling and visual narrative',
@@ -250,15 +259,6 @@ const Sites: React.FC = () => {
       image: 'https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg',
       url: '#',
       tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
-    },
-    {
-      id: 'tech-startup',
-      title: 'TechFlow',
-      description: 'B2B SaaS platform with conversion-focused design and user experience',
-      category: 'web',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg',
-      url: '#',
-      tags: ['SaaS', 'B2B', 'Technology', 'Platform']
     },
     {
       id: 'brand-identity',
