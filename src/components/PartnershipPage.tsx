@@ -375,7 +375,7 @@ Quero entender os próximos passos e como podemos começar.
           </div>
 
           {/* Cenários prontos */}
-          <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.15 }} className="mt-10 grid sm:grid-cols-3 gap-4">
+          <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.15 }} className="hidden mt-10 grid sm:grid-cols-3 gap-4">
             {scenarios.map((p) => {
               const per = Math.max(0, p - BASE_COST);
               return (
