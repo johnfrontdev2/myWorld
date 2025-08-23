@@ -247,8 +247,8 @@ const Sites: React.FC = () => {
       title: 'Jiu-jítsu Academy',
       description: 'B2B SaaS platform with conversion-focused design and user experience',
       category: 'web',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg',
-      url: '#',
+      image: 'https://images.pexels.com/photos/7045756/pexels-photo-7045756.jpeg',
+      url: 'https://jitsussss.netlify.app/',
       tags: ['SaaS', 'B2B', 'Technology', 'Platform']
     },
     {
