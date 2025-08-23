@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -29,30 +30,75 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize]);
 
+  // Função para fazer scroll para uma seção específica
+  const scrollToElement = useCallback((sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return true;
+    }
+    return false;
+  }, []);
+
+  // Função para aguardar o elemento aparecer na DOM
+  const waitForElement = useCallback((sectionId: string, maxAttempts = 20): Promise<boolean> => {
+    return new Promise((resolve) => {
+      let attempts = 0;
+      
+      const checkElement = () => {
+        attempts++;
+        const element = document.getElementById(sectionId);
+        
+        if (element) {
+          resolve(true);
+        } else if (attempts < maxAttempts) {
+          setTimeout(checkElement, 100);
+        } else {
+          resolve(false);
+        }
+      };
+      
+      checkElement();
+    });
+  }, []);
+
+  // Efeito para executar scroll pendente quando chegar na página inicial
+  useEffect(() => {
+    if (location.pathname === '/' && pendingScroll) {
+      const executePendingScroll = async () => {
+        // Aguarda o elemento estar disponível na DOM
+        const elementFound = await waitForElement(pendingScroll);
+        
+        if (elementFound) {
+          // Pequeno delay adicional para garantir renderização completa
+          setTimeout(() => {
+            scrollToElement(pendingScroll);
+          }, 50);
+        }
+        
+        setPendingScroll(null);
+      };
+      
+      executePendingScroll();
+    }
+  }, [location.pathname, pendingScroll, waitForElement, scrollToElement]);
+
   const scrollToSection = useCallback((sectionId: string) => {
     setIsMobileMenuOpen(false);
     
-    // Se não estamos na página inicial, navegar primeiro
+    // Se não estamos na página inicial, navegar primeiro e definir scroll pendente
     if (location.pathname !== '/') {
+      setPendingScroll(sectionId);
       navigate('/');
-      // Aguardar a navegação e então rolar
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 400);
     } else {
       // Se já estamos na página inicial, rolar diretamente
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      scrollToElement(sectionId);
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigate, scrollToElement]);
 
   const navigateToPage = useCallback((path: string) => {
     setIsMobileMenuOpen(false);
+    setPendingScroll(null); // Limpar qualquer scroll pendente
     navigate(path);
   }, [navigate]);
 
