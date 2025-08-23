@@ -328,7 +328,7 @@ Quero entender os próximos passos e como podemos começar.
                 </div>
 
                 {/* Resumo */}
-                <div className="hidden grid grid-cols-3 gap-3 mt-4">
+                <div className=" grid grid-cols-3 gap-3 mt-4">
                   <div className="p-4 rounded-xl border border-silver/40 bg-white/60">
                     <div className="text-[11px] text-gunmetal/70">Lucro por projeto</div>
                     <div className="text-lg font-semibold">{brl(profitPerProject)}</div>
