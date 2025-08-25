@@ -97,7 +97,7 @@ ${data.message}
       minute: '2-digit',
       timeZone: 'America/Sao_Paulo'
     })} (Brazil Time)
-🌐 *Via:* johnnightsteel.com`;
+🌐 *Via:* johnnightsteel.netlify.app`;
 
     return encodeURIComponent(message);
   }, [projectOptions]);
