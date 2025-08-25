@@ -61,7 +61,7 @@ Quero entender os próximos passos e como podemos começar.
       minute: '2-digit',
       timeZone: 'America/Sao_Paulo',
     })}
-🌐 *Via:* johnnightsteel.com/parceria`);
+🌐 *Via:* johnnightsteel.netlify.app/partnership`);
 
     const whatsappUrl = `https://wa.me/557132159293?text=${whatsappMessage}`;
 
