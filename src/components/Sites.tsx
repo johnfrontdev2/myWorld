@@ -254,7 +254,7 @@ const Sites: React.FC = () => {
     {
       id: 'studio-nuvem',
       title: 'Studio Nuvem Agency',
-      description: 'High-fashion brand identity with editorial storytelling and visual narrative',
+      description: 'Website for marketing and traffic agency',
       category: 'editorial',
       image: 'https://images.pexels.com/photos/6476256/pexels-photo-6476256.jpeg',
       url: 'https://studionuvem.netlify.app/',
