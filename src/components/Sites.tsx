@@ -252,12 +252,12 @@ const Sites: React.FC = () => {
       tags: ['SaaS', 'B2B', 'Technology', 'Platform']
     },
     {
-      id: 'fashion-editorial',
-      title: 'Editorial Fashion',
+      id: 'studio-nuvem',
+      title: 'Studio Nuvem Agency',
       description: 'High-fashion brand identity with editorial storytelling and visual narrative',
       category: 'editorial',
-      image: 'https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg',
-      url: '#',
+      image: 'https://images.pexels.com/photos/6476256/pexels-photo-6476256.jpeg',
+      url: 'https://studionuvem.netlify.app/',
       tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
     },
     {
