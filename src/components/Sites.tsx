@@ -261,9 +261,9 @@ const Sites: React.FC = () => {
       tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
     },
     {
-      id: 'brand-identity',
-      title: 'Artisan Collective',
-      description: 'Complete brand identity for luxury craft collective with authentic storytelling',
+      id: 'buddychat',
+      title: 'Buddychat Copilot',
+      description: 'My first AI chatbot',
       category: 'brand',
       image: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg',
       url: '#',
