@@ -224,6 +224,15 @@ ProjectCard.displayName = 'ProjectCard';
 const Sites: React.FC = () => {
   // Dados otimizados com URLs de imagem menores
   const projects = useMemo<Project[]>(() => [
+        {
+      id: 'buddychat',
+      title: 'Buddychat Copilot',
+      description: 'My first AI chatbot',
+      category: 'ai',
+      image: 'https://images.pexels.com/photos/18069697/pexels-photo-18069697.png',
+      url: 'chat-john.netlify.app',
+      tags: ['Branding', 'AI', 'Crafts', 'Identity']
+    },
     {
       id: 'luxury-hotel',
       title: 'Luxuria Hotel',
@@ -259,15 +268,6 @@ const Sites: React.FC = () => {
       image: 'https://images.pexels.com/photos/6476256/pexels-photo-6476256.jpeg',
       url: 'https://studionuvem.netlify.app/',
       tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
-    },
-    {
-      id: 'buddychat',
-      title: 'Buddychat Copilot',
-      description: 'My first AI chatbot',
-      category: 'ai',
-      image: 'https://images.pexels.com/photos/18069697/pexels-photo-18069697.png',
-      url: 'chat-john.netlify.app',
-      tags: ['Branding', 'AI', 'Crafts', 'Identity']
     },
     {
       id: 'editorial-magazine',
