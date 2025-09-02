@@ -265,9 +265,9 @@ const Sites: React.FC = () => {
       title: 'Buddychat Copilot',
       description: 'My first AI chatbot',
       category: 'ai',
-      image: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg',
+      image: 'https://images.pexels.com/photos/18069697/pexels-photo-18069697.png',
       url: 'chat-john.netlify.app',
-      tags: ['Branding', 'Luxury', 'Crafts', 'Identity']
+      tags: ['Branding', 'AI', 'Crafts', 'Identity']
     },
     {
       id: 'editorial-magazine',
