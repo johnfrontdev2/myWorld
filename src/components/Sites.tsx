@@ -230,7 +230,7 @@ const Sites: React.FC = () => {
       description: 'My first AI chatbot',
       category: 'ai',
       image: 'https://images.pexels.com/photos/18069697/pexels-photo-18069697.png',
-      url: 'chat-john.netlify.app',
+      url: 'https://chat-john.netlify.app',
       tags: ['Branding', 'AI', 'Crafts', 'Identity']
     },
     {
