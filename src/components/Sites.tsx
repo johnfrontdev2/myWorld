@@ -270,13 +270,13 @@ const Sites: React.FC = () => {
       tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
     },
     {
-      id: 'editorial-magazine',
-      title: 'Modern Architecture',
-      description: 'Digital magazine with immersive reading experience and interactive content',
-      category: 'editorial',
+      id: 'agencia-flow',
+      title: 'Agência Flow',
+      description: 'Digital ads agency',
+      category: 'marketing',
       image: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg',
-      url: '#',
-      tags: ['Magazine', 'Architecture', 'Editorial', 'Digital']
+      url: 'https://agenciaflowww.netlify.app/',
+      tags: ['ADS', 'Marketing', 'Digital']
     }
   ], []);
 
