@@ -266,7 +266,7 @@ const Sites: React.FC = () => {
       description: 'Website for marketing and traffic agency',
       category: 'editorial',
       image: 'https://images.pexels.com/photos/6476256/pexels-photo-6476256.jpeg',
-      url: 'https://studionuvem.netlify.app/',
+      url: 'https://studinuveem.netlify.app/',
       tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
     },
     {
