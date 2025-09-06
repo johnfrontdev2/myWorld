@@ -2,8 +2,6 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 
 const Footer: React.FC = () => {
