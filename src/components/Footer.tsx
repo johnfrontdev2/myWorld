@@ -45,6 +45,9 @@ const Footer: React.FC = () => {
 
            
 
+           
+          </div>
+
           {/* Services */}
           <div className="md:col-span-1">
             <motion.h3
