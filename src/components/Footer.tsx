@@ -42,7 +42,9 @@ const Footer: React.FC = () => {
             >
               Crafting premium digital experiences for leaders and brands that refuse to blend in.
             </motion.p>
-<motion.div
+
+            {/* Social icons */}
+            <motion.div
   className="flex space-x-3 mb-6"
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
@@ -115,6 +117,7 @@ const Footer: React.FC = () => {
     </a>
   </Button>
 </motion.div>
+
 
             {/* Newsletter */}
             <motion.form
