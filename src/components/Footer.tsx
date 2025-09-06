@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { AtSign, Instagram, BriefcaseBusiness } from "lucide-react"
+import { AtSign, Instagram, FolderGit } from "lucide-react"
  
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
               >
                 <Button variant="outline" size="icon" className="rounded-full">
-                  <BriefcaseBusiness className="h-4 w-4" />
+                  <FolderGit className="h-4 w-4" />
                   <span className="sr-only">Behance</span>
                 </Button>
               </a>
