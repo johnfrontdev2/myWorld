@@ -168,4 +168,4 @@ const Sites = ({
   );
 };
 
-export { Sites };
+export default Sites;
