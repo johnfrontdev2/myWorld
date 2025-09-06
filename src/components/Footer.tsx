@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
+import { AtSign, Instagram, BriefcaseBusiness } from "lucide-react"
  
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
@@ -44,29 +44,49 @@ const Footer: React.FC = () => {
             </motion.p>
 
             {/* Social icons */}
-            <motion.div
-              className="flex space-x-3 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-            >
-              <Button variant="outline" size="icon" className="rounded-full">
-                <Facebook className="h-4 w-4" />
-                <span className="sr-only">Facebook</span>
-              </Button>
-              <Button variant="outline" size="icon" className="rounded-full">
-                <Twitter className="h-4 w-4" />
-                <span className="sr-only">Twitter</span>
-              </Button>
-              <Button variant="outline" size="icon" className="rounded-full">
-                <Instagram className="h-4 w-4" /> 
-                <span className="sr-only">Instagram</span>
-              </Button>
-              <Button variant="outline" size="icon" className="rounded-full">
-                <Linkedin className="h-4 w-4" />
-                <span className="sr-only">LinkedIn</span>
-              </Button>
-            </motion.div>
+<motion.div
+  className="flex space-x-3 mb-6"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.15 }}
+>
+  {/* Threads */}
+  <Button asChild variant="outline" size="icon" className="rounded-full">
+    <a
+      href="https://www.threads.net/@johnnightsteel"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <AtSign className="h-4 w-4" />
+      <span className="sr-only">Threads</span>
+    </a>
+  </Button>
+
+  {/* Instagram */}
+  <Button asChild variant="outline" size="icon" className="rounded-full">
+    <a
+      href="https://instagram.com/johnnightsteel"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Instagram className="h-4 w-4" />
+      <span className="sr-only">Instagram</span>
+    </a>
+  </Button>
+
+  {/* Behance */}
+  <Button asChild variant="outline" size="icon" className="rounded-full">
+    <a
+      href="https://www.behance.net/johnfrontdev"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <BriefcaseBusiness className="h-4 w-4" />
+      <span className="sr-only">Behance</span>
+    </a>
+  </Button>
+</motion.div>
+
 
             {/* Newsletter */}
             <motion.form
