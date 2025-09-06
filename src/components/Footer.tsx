@@ -44,48 +44,48 @@ const Footer: React.FC = () => {
             </motion.p>
 
             {/* Social icons */}
-<motion.div
-  className="flex space-x-3 mb-6"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.15 }}
->
-  {/* Threads */}
-  <Button asChild variant="outline" size="icon" className="rounded-full">
-    <a
-      href="https://www.threads.net/@johnnightsteel"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <AtSign className="h-4 w-4" />
-      <span className="sr-only">Threads</span>
-    </a>
-  </Button>
-
-  {/* Instagram */}
-  <Button asChild variant="outline" size="icon" className="rounded-full">
-    <a
-      href="https://instagram.com/johnnightsteel"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Instagram className="h-4 w-4" />
-      <span className="sr-only">Instagram</span>
-    </a>
-  </Button>
-
-  {/* Behance */}
-  <Button asChild variant="outline" size="icon" className="rounded-full">
-    <a
-      href="https://www.behance.net/johnfrontdev"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <BriefcaseBusiness className="h-4 w-4" />
-      <span className="sr-only">Behance</span>
-    </a>
-  </Button>
-</motion.div>
+            <motion.div
+              className="flex space-x-3 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              {/* Threads */}
+              <a
+                href="https://www.threads.net/@johnnightsteel"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="icon" className="rounded-full">
+                  <AtSign className="h-4 w-4" />
+                  <span className="sr-only">Threads</span>
+                </Button>
+              </a>
+            
+              {/* Instagram */}
+              <a
+                href="https://instagram.com/johnnightsteel"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="icon" className="rounded-full">
+                  <Instagram className="h-4 w-4" />
+                  <span className="sr-only">Instagram</span>
+                </Button>
+              </a>
+            
+              {/* Behance */}
+              <a
+                href="https://www.behance.net/johnfrontdev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="icon" className="rounded-full">
+                  <BriefcaseBusiness className="h-4 w-4" />
+                  <span className="sr-only">Behance</span>
+                </Button>
+              </a>
+            </motion.div>
 
 
             {/* Newsletter */}
