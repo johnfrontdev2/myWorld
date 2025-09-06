@@ -85,7 +85,7 @@ const Testimonials = () => {
               id="sites-heading"
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-6 text-obsidian leading-tight"
             >
-              Crafted with intention.<br />Built for long-term impact.
+              Real Experiences, <br />Real Results
             </h2>
           </ScrollReveal>
           
