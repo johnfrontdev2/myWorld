@@ -45,30 +45,6 @@ const Footer: React.FC = () => {
 
            
 
-            {/* Newsletter */}
-            <motion.form
-              className="flex space-x-2 max-w-xs"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="flex-grow">
-                <Label htmlFor="email" className="sr-only">
-                  Email
-                </Label>
-                <Input
-                  id="email"
-                  placeholder="Enter your email"
-                  type="email"
-                  className="rounded-full"
-                />
-              </div>
-              <Button type="submit" className="rounded-full">
-                Subscribe
-              </Button>
-            </motion.form>
-          </div>
-
           {/* Services */}
           <div className="md:col-span-1">
             <motion.h3
