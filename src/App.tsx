@@ -7,7 +7,7 @@ import About from './components/About';
 import Services from './components/Services';
 import Gallery from './components/Gallery';
 import Sites from './components/Sites';
-import testimonials from './components/testimonials';
+import Testimonials from './components/testimonials';
 import Journal from './components/Journal';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
