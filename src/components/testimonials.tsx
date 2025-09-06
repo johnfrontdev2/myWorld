@@ -69,24 +69,31 @@ const Testimonials = () => {
   return (
     <section className="bg-background my-20 relative">
       <div className="container z-10 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
-        >
-          <div className="flex justify-center">
-            <div className="border py-1 px-4 rounded-lg">Testimonials</div>
-          </div>
-
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
-            What our users say
-          </h2>
-          <p className="text-center mt-5 opacity-75">
-            See what our customers have to say about us.
-          </p>
-        </motion.div>
+         {/* Header section */}
+        <header className="text-center mb-12 sm:mb-16">
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="mb-6 sm:mb-8">
+              <span className="inline-block px-4 py-2 bg-midnight/5 text-midnight text-sm font-medium font-display tracking-wide rounded-full border border-silver/50 transition-all duration-300 hover:bg-midnight/8">
+                Selected Works
+              </span>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={0.2}>
+            <h2 
+              id="sites-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-6 text-obsidian leading-tight"
+            >
+              Crafted with intention.<br />Built for long-term impact.
+            </h2>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={0.3}>
+            <p className="text-lg sm:text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
+              Each project represents a strategic partnership focused on digital excellence and measurable results.
+            </p>
+          </ScrollReveal>
+        </header>
 
         <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
           <TestimonialsColumn testimonials={firstColumn} duration={15} />
