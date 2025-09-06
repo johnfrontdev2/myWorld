@@ -114,7 +114,7 @@ const Sites: React.FC = () => {
         >
           {projects.map((project, index) => (
             <SwiperSlide key={project.id}>
-              <ProjectCard project={project} index={index} />
+
             </SwiperSlide>
           ))}
         </Swiper>
