@@ -2,8 +2,11 @@
 
 import React from "react"
 import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
-
+ 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
 
