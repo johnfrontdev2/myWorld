@@ -91,7 +91,7 @@ const Testimonials = () => {
           
           <ScrollReveal direction="up" delay={0.3}>
             <p className="text-lg sm:text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
-              Hear directly from those who have experienced my work first-hand and seen tangible results.
+              Discover how our clients turned their ideas into tangible results through our work.
             </p>
           </ScrollReveal>
         </header>
