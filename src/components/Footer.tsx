@@ -186,7 +186,7 @@ const Footer: React.FC = () => {
             © {currentYear} johnnightsteel. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-gunmetal">
+          <div className="hidden flex items-center gap-6 text-sm text-gunmetal">
             <span>Crafted with precision</span>
             <span className="w-1 h-1 bg-silver rounded-full" />
             <span>Built for impact</span>
