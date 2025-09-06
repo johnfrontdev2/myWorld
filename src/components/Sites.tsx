@@ -7,7 +7,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import ScrollReveal from './ScrollReveal';
-import ProjectCard from './ProjectCard';
 
 const Sites: React.FC = () => {
   const projects = useMemo(() => [
