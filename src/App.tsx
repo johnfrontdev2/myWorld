@@ -52,6 +52,7 @@ function App() {
             <Services />
             <Gallery />
             <Sites />
+            <Testimonials />
             <Journal />
             <Contact />
             <Footer />
