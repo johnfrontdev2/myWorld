@@ -91,7 +91,7 @@ const Testimonials = () => {
           
           <ScrollReveal direction="up" delay={0.3}>
             <p className="text-lg sm:text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
-              Each project represents a strategic partnership focused on digital excellence and measurable results.
+              Genuine feedback from clients who transformed their ideas into impactful outcomes.
             </p>
           </ScrollReveal>
         </header>
