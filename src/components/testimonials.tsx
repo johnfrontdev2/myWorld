@@ -6,59 +6,59 @@ import { motion } from "motion/react";
 
 const testimonials = [
   {
-    text: "This ERP revolutionized our operations, streamlining finance and inventory.",
+    text: "John built our CRM from scratch and made it so easy for our team to use. The interface is clear and everything just works.",
     image: "https://randomuser.me/api/portraits/women/1.jpg",
     name: "Briana Patton",
     role: "Operations Manager",
   },
   {
-    text: "Implementing this ERP was smooth and quick. The customizable interface helped a lot.",
+    text: "He delivered our React website quickly and the UX/UI is simple and intuitive. Working with him was smooth from start to finish.",
     image: "https://randomuser.me/api/portraits/men/2.jpg",
     name: "Bilal Ahmed",
     role: "IT Manager",
   },
   {
-    text: "The support team is exceptional, guiding us through setup and providing assistance.",
+    text: "John is very hands-on and supportive. He helped us set up our system and suggested improvements that made our work easier.",
     image: "https://randomuser.me/api/portraits/women/3.jpg",
     name: "Saman Malik",
     role: "Customer Support Lead",
   },
   {
-    text: "This ERP's seamless integration enhanced our business operations and efficiency.",
+    text: "He integrated our tools perfectly and made our workflow faster and simpler. Everything feels smoother now.",
     image: "https://randomuser.me/api/portraits/men/4.jpg",
     name: "Omar Raza",
     role: "CEO",
   },
   {
-    text: "Its robust features and quick support have transformed our workflow.",
+    text: "John doesn’t just code, he makes things work for people. Our team adapted to the new system right away and productivity improved.",
     image: "https://randomuser.me/api/portraits/women/5.jpg",
     name: "Zainab Hussain",
     role: "Project Manager",
   },
   {
-    text: "The smooth implementation exceeded expectations.",
+    text: "Our website and landing pages look better and work better. John really understands what users need.",
     image: "https://randomuser.me/api/portraits/women/6.jpg",
     name: "Aliza Khan",
     role: "Business Analyst",
   },
   {
-    text: "Our business functions improved with a user-friendly design.",
+    text: "The CRM he designed is so intuitive that anyone can use it. He combines React and UX/UI in a practical way.",
     image: "https://randomuser.me/api/portraits/men/7.jpg",
     name: "Farhan Siddiqui",
     role: "Marketing Director",
   },
   {
-    text: "They delivered a solution that exceeded expectations.",
+    text: "John delivered our project faster than expected and with high quality. He knows how to turn ideas into real solutions.",
     image: "https://randomuser.me/api/portraits/women/8.jpg",
     name: "Sana Sheikh",
     role: "Sales Manager",
   },
   {
-    text: "Using this ERP, our online presence and conversions significantly improved.",
+    text: "After John improved our platform, our conversions went up and customers enjoy using it much more.",
     image: "https://randomuser.me/api/portraits/men/9.jpg",
     name: "Hassan Ali",
     role: "E-commerce Manager",
-  },
+  }
 ];
 
 const firstColumn = testimonials.slice(0, 3);
