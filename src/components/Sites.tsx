@@ -9,7 +9,7 @@ interface Card {
   url: string;
 }
 
-const CarouselComponent: React.FC = () => {
+const Sites: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -235,4 +235,4 @@ const CarouselComponent: React.FC = () => {
   );
 };
 
-export default CarouselComponent;
+export default Sites;
