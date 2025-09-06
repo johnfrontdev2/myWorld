@@ -1,238 +1,364 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
-interface Card {
+import React, { useCallback, useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Image } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
+
+interface Project {
   id: string;
   title: string;
   description: string;
+  category: 'web' | 'brand' | 'editorial';
   image: string;
   url: string;
+  tags: string[];
 }
 
-const Sites: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+// Componente de skeleton loader para imagens
+const ImageSkeleton = React.memo(() => (
+  <div className="w-full h-full bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 animate-pulse flex items-center justify-center">
+    <Image className="w-12 h-12 text-slate-400" />
+  </div>
+));
 
-  // Dados dos cards baseados no screenshot
-  const cards = useMemo<Card[]>(() => [
-    {
-      id: 'shadcn-ui',
-      title: 'shadcn/ui: Building a Modern Component Library',
-      description: 'Explore how shadcn/ui revolutionized React component libraries by...',
-      image: 'https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg',
-      url: '#'
+ImageSkeleton.displayName = 'ImageSkeleton';
+
+// Componente otimizado de imagem com lazy loading avançado
+const OptimizedImage = React.memo<{
+  src: string;
+  alt: string;
+  loading: 'eager' | 'lazy';
+  className?: string;
+}>(({ src, alt, loading, className }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+  }, []);
+
+  const handleImageError = useCallback(() => {
+    setImageError(true);
+    setImageLoaded(true);
+  }, []);
+
+  // Gerar URL otimizada do Pexels com parâmetros de compressão
+  const optimizedSrc = useMemo(() => {
+    if (!src.includes('pexels.com')) return src;
+    
+    // Adiciona parâmetros de otimização do Pexels
+    const url = new URL(src);
+    url.searchParams.set('auto', 'compress');
+    url.searchParams.set('cs', 'tinysrgb');
+    url.searchParams.set('w', '800'); // Largura otimizada
+    url.searchParams.set('h', '600'); // Altura otimizada
+    url.searchParams.set('dpr', '1'); // Device pixel ratio
+    url.searchParams.set('fit', 'crop'); // Crop para manter aspect ratio
+    
+    return url.toString();
+  }, [src]);
+
+  return (
+    <div className="relative w-full h-full">
+      {!imageLoaded && !imageError && <ImageSkeleton />}
+      
+      {!imageError && (
+        <img
+          src={optimizedSrc}
+          alt={alt}
+          className={`${className} transition-opacity duration-500 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          loading={loading}
+          decoding="async"
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          // Adiciona srcSet para diferentes densidades de tela
+          srcSet={src.includes('pexels.com') ? `
+            ${optimizedSrc}&w=400 400w,
+            ${optimizedSrc}&w=800 800w,
+            ${optimizedSrc}&w=1200 1200w
+          ` : undefined}
+          sizes={src.includes('pexels.com') ? `
+            (max-width: 640px) 100vw,
+            (max-width: 1024px) 50vw,
+            33vw
+          ` : undefined}
+        />
+      )}
+      
+      {imageError && (
+        <div className="w-full h-full bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center">
+          <div className="text-center text-slate-600">
+            <Image className="w-8 h-8 mx-auto mb-2 opacity-60" />
+            <span className="text-sm">Image unavailable</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+});
+
+OptimizedImage.displayName = 'OptimizedImage';
+
+// Componente do card do projeto com melhorias de performance
+const ProjectCard = React.memo<{ project: Project; index: number }>(({ project, index }) => {
+  const handleClick = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault();
+    if (project.url === '#') return;
+    
+    // Usa requestIdleCallback para melhor performance
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        window.open(project.url, '_blank', 'noopener,noreferrer');
+      });
+    } else {
+      setTimeout(() => {
+        window.open(project.url, '_blank', 'noopener,noreferrer');
+      }, 0);
+    }
+  }, [project.url]);
+
+  const isLive = useMemo(() => project.url !== '#', [project.url]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleClick(e);
+    }
+  }, [handleClick]);
+
+  return (
+    <ScrollReveal direction="up" delay={0.1 * index}>
+      <article
+        className="group cursor-pointer transform transition-transform duration-300 hover:scale-[1.02] focus:scale-[1.02]"
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        aria-label={`${project.title} - ${project.description}${isLive ? ' - Live project' : ' - Coming soon'}`}
+      >
+        <div className="card-elevated overflow-hidden h-full">
+          {/* Container de imagem otimizado */}
+          <div className="aspect-[4/3] relative overflow-hidden">
+            <OptimizedImage
+              src={project.image}
+              alt={`${project.title} - ${project.description}`}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-focus:scale-110"
+              loading={index < 2 ? 'eager' : 'lazy'} // Apenas primeiros 2 cards carregam imediatamente
+            />
+            
+            {/* RGB Overlay otimizado */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 via-purple-500/4 to-pink-500/8 mix-blend-overlay" />
+            </div>
+            
+            {/* Content Overlay com melhores transições */}
+            <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 transform group-hover:translate-y-0 group-focus:translate-y-0 transition-transform duration-300">
+              <div className="text-white">
+                {/* Header com status */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-medium text-white/90 bg-white/20 px-3 py-1.5 rounded-full capitalize backdrop-blur-sm border border-white/10 transition-all duration-300 group-hover:bg-white/30">
+                    {project.category}
+                  </span>
+                  {isLive && (
+                    <div 
+                      className="flex items-center gap-1.5"
+                      aria-hidden="true"
+                    >
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                      <span className="text-xs text-green-300 font-medium">Live</span>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Título otimizado */}
+                <h3 className="text-lg sm:text-xl font-display font-semibold mb-3 leading-tight line-clamp-2">
+                  {project.title}
+                </h3>
+                
+                {/* Descrição com line-clamp */}
+                <p className="text-sm text-white/90 mb-4 leading-relaxed line-clamp-2">
+                  {project.description}
+                </p>
+                
+                {/* Tags otimizadas */}
+                <div className="flex flex-wrap gap-1.5 mb-4" role="list">
+                  {project.tags.slice(0, 3).map((tag) => (
+                    <span 
+                      key={tag}
+                      role="listitem"
+                      className="text-xs text-white/80 bg-white/15 px-2.5 py-1 rounded-full backdrop-blur-sm border border-white/10 transition-all duration-300 hover:bg-white/25"
+                    >
+                      {tag}
+                    </span> 
+                  ))}
+                  {project.tags.length > 3 && (
+                    <span className="text-xs text-white/60 px-2.5 py-1">
+                      +{project.tags.length - 3} more
+                    </span>
+                  )}
+                </div>
+                
+                {/* Action button melhorado */}
+                {isLive ? (
+                  <div className="inline-flex items-center gap-2 text-sm font-medium text-white bg-white/20 backdrop-blur-md px-4 py-2.5 rounded-full border border-white/30 transition-all duration-300 hover:bg-white/30 hover:border-white/40 focus:bg-white/30 focus:border-white/40">
+                    <span>View Project</span>
+                    <ExternalLink className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-2 text-sm font-medium text-white/70 bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-full border border-white/20 cursor-not-allowed">
+                    <span>Coming Soon</span>
+                    <div className="w-2 h-2 bg-white/40 rounded-full animate-pulse" />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </ScrollReveal>
+  );
+});
+
+ProjectCard.displayName = 'ProjectCard';
+
+const Sites: React.FC = () => {
+  // Dados otimizados com URLs de imagem menores
+  const projects = useMemo<Project[]>(() => [
+        {
+      id: 'buddychat',
+      title: 'Buddychat Copilot',
+      description: 'My first AI chatbot',
+      category: 'ai',
+      image: 'https://images.pexels.com/photos/18069697/pexels-photo-18069697.png',
+      url: 'https://chat-john.netlify.app',
+      tags: ['Branding', 'AI', 'Crafts', 'Identity']
     },
     {
-      id: 'tailwind-css',
-      title: 'Tailwind CSS: The Utility-First Revolution',
-      description: 'Discover how Tailwind CSS transformed the way developers style...',
-      image: 'https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg',
-      url: '#'
+      id: 'luxury-hotel',
+      title: 'Luxuria Hotel',
+      description: 'Premium hospitality brand with immersive booking experience and luxury amenities',
+      category: 'web',
+      image: 'https://images.pexels.com/photos/33259643/pexels-photo-33259643.jpeg',
+      url: 'https://luxuriahotel.netlify.app/',
+      tags: ['Hospitality', 'Luxury', 'Booking', 'UX Design']
     },
     {
-      id: 'astro-framework',
-      title: 'Astro: The All-in-One Web Framework',
-      description: 'Learn how Astro\'s innovative \'Islands Architecture\' and zero-JS-by-default...',
-      image: 'https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg',
-      url: '#'
+      id: 'sora-dubai',
+      title: 'SORA Dubai',
+      description: 'Sophisticated property showcase with architectural focus and modern design principles',
+      category: 'web',
+      image: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg',
+      url: 'https://soradubai.netlify.app/',
+      tags: ['Real Estate', 'Architecture', 'Dubai', 'Property']
     },
     {
-      id: 'react-components',
-      title: 'React: Pioneering Component-Based Architecture',
-      description: 'See how React continues to shape modern web development...',
-      image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg',
-      url: '#'
+      id: 'jiu-jitsu',
+      title: 'Jiu-jítsu Academy',
+      description: 'Intense training, discipline and guaranteed evolution, on the mat and in life.',
+      category: 'web',
+      image: 'https://images.pexels.com/photos/7045756/pexels-photo-7045756.jpeg',
+      url: 'https://jitsussss.netlify.app/',
+      tags: ['SaaS', 'B2B', 'Technology', 'Platform']
+    },
+    {
+      id: 'studio-nuvem',
+      title: 'Studio Nuvem Agency',
+      description: 'Website for marketing and traffic agency',
+      category: 'editorial',
+      image: 'https://images.pexels.com/photos/6476256/pexels-photo-6476256.jpeg',
+      url: 'https://studinuveem.netlify.app/',
+      tags: ['Fashion', 'Editorial', 'Branding', 'Photography']
+    },
+    {
+      id: 'agencia-flow',
+      title: 'Agência Flow',
+      description: 'Digital ads agency',
+      category: 'marketing',
+      image: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg',
+      url: 'https://agenciaflowww.netlify.app/',
+      tags: ['ADS', 'Marketing', 'Digital']
     }
   ], []);
 
-  // Auto-play functionality
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isTransitioning) {
-        handleNext();
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex, isTransitioning]);
-
-  const handleNext = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev + 1) % cards.length);
-    setTimeout(() => setIsTransitioning(false), 300);
-  }, [cards.length, isTransitioning]);
-
-  const handlePrev = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
-    setTimeout(() => setIsTransitioning(false), 300);
-  }, [cards.length, isTransitioning]);
-
-  const goToSlide = useCallback((index: number) => {
-    if (isTransitioning || index === currentIndex) return;
-    setIsTransitioning(true);
-    setCurrentIndex(index);
-    setTimeout(() => setIsTransitioning(false), 300);
-  }, [currentIndex, isTransitioning]);
-
-  // Touch handlers
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  }, []);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  }, []);
-
-  const handleTouchEnd = useCallback(() => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      handleNext();
-    } else if (isRightSwipe) {
-      handlePrev();
+  const handleStartProject = useCallback(() => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [touchStart, touchEnd, handleNext, handlePrev]);
-
-  const getVisibleCards = useMemo(() => {
-    const visibleCards = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % cards.length;
-      visibleCards.push({ ...cards[index], position: i });
-    }
-    return visibleCards;
-  }, [currentIndex, cards]);
+  }, []);
 
   return (
-    <section className="w-full min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-            Latest Insights
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Discover the latest trends and innovations in web development
-          </p>
-        </div>
-
-        {/* Carousel Container */}
-        <div className="relative">
-          {/* Main Carousel */}
-          <div 
-            className="flex items-center justify-center gap-6 lg:gap-8 transition-all duration-500 ease-out"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            {getVisibleCards.map((card, index) => (
-              <div
-                key={`${card.id}-${currentIndex}`}
-                className={`
-                  relative rounded-2xl overflow-hidden transition-all duration-500 ease-out cursor-pointer
-                  ${index === 0 ? 
-                    'w-80 h-96 sm:w-96 sm:h-[28rem] transform scale-95 opacity-60 z-10' : 
-                    index === 1 ? 
-                    'w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] transform scale-100 opacity-100 z-20 shadow-2xl' : 
-                    'w-80 h-96 sm:w-96 sm:h-[28rem] transform scale-95 opacity-60 z-10'
-                  }
-                `}
-                onClick={() => index === 1 && window.open(card.url, '_blank')}
-              >
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                </div>
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-3 leading-tight line-clamp-2">
-                    {card.title}
-                  </h3>
-                  
-                  <p className="text-sm sm:text-base text-gray-200 mb-6 leading-relaxed line-clamp-2">
-                    {card.description}
-                  </p>
-
-                  {/* Read More Button */}
-                  <div className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-blue-300 transition-colors duration-300">
-                    <span>Read more</span>
-                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </div>
-                </div>
-
-                {/* Hover Effect */}
-                <div className="absolute inset-0 bg-blue-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={handlePrev}
-            disabled={isTransitioning}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center text-slate-700 hover:bg-white hover:text-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={handleNext}
-            disabled={isTransitioning}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center text-slate-700 hover:bg-white hover:text-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Dots Navigation */}
-        <div className="flex justify-center items-center gap-2 mt-12">
-          {cards.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              disabled={isTransitioning}
-              className={`
-                w-3 h-3 rounded-full transition-all duration-300 disabled:cursor-not-allowed
-                ${index === currentIndex 
-                  ? 'bg-slate-800 scale-125' 
-                  : 'bg-slate-400 hover:bg-slate-600'
-                }
-              `}
-              aria-label={`Go to slide ${index + 1}`}
+    <section 
+      id="sites" 
+      className="py-12 sm:py-16 lg:py-24 bg-white relative overflow-hidden"
+      aria-labelledby="sites-heading"
+    >
+      {/* Background gradient otimizado */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-transparent to-midnight/[0.015] pointer-events-none will-change-auto" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        
+        {/* Header section */}
+        <header className="text-center mb-12 sm:mb-16">
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="mb-6 sm:mb-8">
+              <span className="inline-block px-4 py-2 bg-midnight/5 text-midnight text-sm font-medium font-display tracking-wide rounded-full border border-silver/50 transition-all duration-300 hover:bg-midnight/8">
+                Selected Works
+              </span>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={0.2}>
+            <h2 
+              id="sites-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-6 text-obsidian leading-tight"
+            >
+              Crafted with intention.<br />Built for long-term impact.
+            </h2>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={0.3}>
+            <p className="text-lg sm:text-xl text-gunmetal font-light max-w-3xl mx-auto leading-relaxed">
+              Each project represents a strategic partnership focused on digital excellence and measurable results.
+            </p>
+          </ScrollReveal>
+        </header>
+        
+        {/* Projects Grid otimizado */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
             />
           ))}
         </div>
-
-        {/* Progress Bar */}
-        <div className="mt-8 max-w-md mx-auto">
-          <div className="w-full bg-slate-300 rounded-full h-1">
-            <div 
-              className="bg-slate-800 h-1 rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${((currentIndex + 1) / cards.length) * 100}%` }}
-            />
-          </div>
-        </div>
+        
+        {/* Bottom CTA section */}
+        <footer className="text-center mt-12 sm:mt-16 lg:mt-20">
+          <ScrollReveal direction="up" delay={0.4}>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-gunmetal mb-8 leading-relaxed">
+                Ready to create something exceptional? Let's discuss your vision and bring it to life.
+              </p>
+              <motion.button
+                onClick={handleStartProject}
+                className="btn-primary sheen-effect inline-flex items-center gap-2 px-8 py-3 text-base font-medium rounded-full transition-all duration-300 focus:ring-4 focus:ring-blue-500/20"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Scroll to contact section to start a new project"
+              >
+                Start a Project
+                <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </motion.button>
+            </div>
+          </ScrollReveal>
+        </footer>
       </div>
     </section>
   );
 };
 
-export default Sites;
+export default Sites; 
