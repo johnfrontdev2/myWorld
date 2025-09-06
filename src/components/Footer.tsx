@@ -45,79 +45,28 @@ const Footer: React.FC = () => {
 
             {/* Social icons */}
             <motion.div
-  className="flex space-x-3 mb-6"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.15 }}
->
-  {/* Threads */}
-  <Button
-    asChild
-    variant="outline"
-    size="icon"
-    className="rounded-full"
-  >
-    <a
-      href="https://www.threads.net/@johnnightsteel"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {/* SVG oficial Threads */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 192 192"
-        fill="currentColor"
-        className="h-4 w-4"
-      >
-        <path d="M141.9 105.6c-3.6-1.7-7.5-3.2-11.5-4.4...Z" />
-      </svg>
-      <span className="sr-only">Threads</span>
-    </a>
-  </Button>
-
-  {/* Instagram */}
-  <Button
-    asChild
-    variant="outline"
-    size="icon"
-    className="rounded-full"
-  >
-    <a
-      href="https://instagram.com/johnnightsteel"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Instagram className="h-4 w-4" />
-      <span className="sr-only">Instagram</span>
-    </a>
-  </Button>
-
-  {/* Behance */}
-  <Button
-    asChild
-    variant="outline"
-    size="icon"
-    className="rounded-full"
-  >
-    <a
-      href="https://www.behance.net/johnfrontdev"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {/* Behance ícone (SVG oficial) */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 576 512"
-        fill="currentColor"
-        className="h-4 w-4"
-      >
-        <path d="M232 237.2c0-25.2-17.2-25.2-17.2-25.2h-57v50.4h57c.1 0 17.2-.1 17.2-25.2zM521.8 169.7H382.3v-30.9h139.5v30.9zM244.2 285.1s21.5-1.7 21.5-27.5c0-25.7-16.8-38.4-39.9-38.4H112v136.3h114c0 .1 51.6 1.6 51.6-44.6 0-29.5-25.4-25.8-25.4-25.8zM414.7 211.2c-72.3 0-72.4 72.5-72.4 72.5s-4.9 72.5 72.4 72.5c0 0 64.4 3.7 64.4-44.8h-33.5s1.1 18.1-30.1 18.1c0 0-33.1 2.2-33.1-33.1h97.9s11.3-85.2-65.6-85.2z"/>
-      </svg>
-      <span className="sr-only">Behance</span>
-    </a>
-  </Button>
-</motion.div>
-
+              className="flex space-x-3 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <Button variant="outline" size="icon" className="rounded-full">
+                <Facebook className="h-4 w-4" />
+                <span className="sr-only">Facebook</span>
+              </Button>
+              <Button variant="outline" size="icon" className="rounded-full">
+                <Twitter className="h-4 w-4" />
+                <span className="sr-only">Twitter</span>
+              </Button>
+              <Button variant="outline" size="icon" className="rounded-full">
+                <Instagram className="h-4 w-4" /> 
+                <span className="sr-only">Instagram</span>
+              </Button>
+              <Button variant="outline" size="icon" className="rounded-full">
+                <Linkedin className="h-4 w-4" />
+                <span className="sr-only">LinkedIn</span>
+              </Button>
+            </motion.div>
 
             {/* Newsletter */}
             <motion.form
