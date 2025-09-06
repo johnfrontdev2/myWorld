@@ -3,6 +3,7 @@
 import React from "react";
 import { TestimonialsColumn } from "./testimonials-columns-1";
 import { motion } from "motion/react";
+import ScrollReveal from './ScrollReveal';
  
 const testimonials = [
   {
