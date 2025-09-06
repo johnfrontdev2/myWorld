@@ -3,7 +3,7 @@
 import React from "react";
 import { TestimonialsColumn } from "./components/testimonials-columns-1";
 import { motion } from "motion/react";
-
+ 
 const testimonials = [
   {
     text: "John built our CRM from scratch and made it so easy for our team to use. The interface is clear and everything just works.",
