@@ -244,14 +244,15 @@ const Sites: React.FC = () => {
       tags: ['Hospitality', 'Luxury', 'Booking', 'UX Design']
     },
     {
-      id: 'sora-dubai',
-      title: 'SORA Dubai',
-      description: 'Sophisticated property showcase with architectural focus and modern design principles',
-      category: 'web',
-      image: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg',
-      url: 'https://soradubai.netlify.app/',
-      tags: ['Real Estate', 'Architecture', 'Dubai', 'Property']
-    },
+  "id": "guard-tech",
+  "title": "GuardTech Security",
+  "description": "Modern, high-converting website designed for security electronics. Highlights 24/7 monitoring, smart alarms, and instant WhatsApp integration for fast quotes.",
+  "category": "web",
+  "image": "https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg",
+  "url": "https://guardtechsecurity.netlify.app/",
+  "tags": ["Security Electronics", "Monitoring", "Alarms", "Leads", "Conversion"]
+},
+
     {
       id: 'jiu-jitsu',
       title: 'Jiu-jítsu Academy',
