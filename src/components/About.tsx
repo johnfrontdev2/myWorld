@@ -60,11 +60,11 @@ const About: React.FC = () => {
             <ScrollReveal direction="up" delay={1.0}>
               <div className="grid grid-cols-3 gap-8 pt-8">
                 <div className="text-center">
-                  <div className="text-2xl font-display font-bold text-obsidian mb-1">50+</div>
+                  <div className="text-2xl font-display font-bold text-obsidian mb-1">100+</div>
                   <div className="text-sm text-gunmetal font-medium">Projects Delivered</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-display font-bold text-obsidian mb-1">5+</div>
+                  <div className="text-2xl font-display font-bold text-obsidian mb-1">7+</div>
                   <div className="text-sm text-gunmetal font-medium">Years Experience</div>
                 </div>
                 <div className="text-center">
