@@ -246,7 +246,7 @@ const Sites: React.FC = () => {
     {
       id: 'protecta',
       title: 'PROTECTA',
-      description: 'Modern, high-converting website designed for security electronics, with instant WhatsApp integration for fast quotes.',
+      description: 'High-converting website designed for security electronics. WhatsApp integration for fast quotes.',
       category: 'web',
       image: 'https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg',
       url: 'https://sitesegurancaeletronica.netlify.app/',
