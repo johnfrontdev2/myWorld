@@ -8,13 +8,16 @@ const Contact: React.FC = () => {
     name: '',
     email: '',
     project: '',
+    budget: '',
     message: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isBudgetDropdownOpen, setIsBudgetDropdownOpen] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const budgetDropdownRef = useRef<HTMLDivElement>(null);
 
   const projectOptions = [
     { value: 'premium-website', label: 'Premium Website' },
@@ -23,6 +26,14 @@ const Contact: React.FC = () => {
     { value: 'brand-identity', label: 'Brand Identity' },
     { value: 'consultation', label: 'Strategy Consultation' },
     { value: 'other', label: 'Other' }
+  ];
+
+  const budgetOptions = [
+    { value: 'less-than-1k', label: 'Less than $1,000' },
+    { value: '1k-5k', label: '$1,000 - $5,000' },
+    { value: '5k-10k', label: '$5,000 - $10,000' },
+    { value: '10k-20k', label: '$10,000 - $20,000' },
+    { value: 'more-than-20k', label: 'More than $20,000' }
   ];
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -47,8 +58,23 @@ const Contact: React.FC = () => {
     }
   }, [submitStatus]);
 
+  const handleBudgetSelect = useCallback((value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      budget: value
+    }));
+    setIsBudgetDropdownOpen(false);
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+    }
+  }, [submitStatus]);
+
   const toggleDropdown = useCallback(() => {
     setIsDropdownOpen(prev => !prev);
+  }, []);
+
+  const toggleBudgetDropdown = useCallback(() => {
+    setIsBudgetDropdownOpen(prev => !prev);
   }, []);
 
   // Close dropdown on outside click
@@ -56,6 +82,9 @@ const Contact: React.FC = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
+      }
+      if (budgetDropdownRef.current && !budgetDropdownRef.current.contains(event.target as Node)) {
+        setIsBudgetDropdownOpen(false);
       }
     };
 
@@ -68,6 +97,7 @@ const Contact: React.FC = () => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsDropdownOpen(false);
+        setIsBudgetDropdownOpen(false);
       }
     };
 
@@ -77,6 +107,7 @@ const Contact: React.FC = () => {
 
   const formatWhatsAppMessage = useCallback((data: typeof formData) => {
     const projectLabel = projectOptions.find(opt => opt.value === data.project)?.label || data.project;
+    const budgetLabel = budgetOptions.find(opt => opt.value === data.budget)?.label || data.budget;
     
     const message = `🎯 *NEW PROJECT INQUIRY*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -84,6 +115,7 @@ const Contact: React.FC = () => {
 👤 *Client:* ${data.name}
 📧 *Email:* ${data.email}
 🚀 *Project Type:* ${projectLabel}
+💰 *Budget:* ${budgetLabel}
 
 💬 *Message:*
 ${data.message}
@@ -100,13 +132,13 @@ ${data.message}
 🌐 *Via:* johnnightsteel.netlify.app`;
 
     return encodeURIComponent(message);
-  }, [projectOptions]);
+  }, [projectOptions, budgetOptions]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.name.trim() || !formData.email.trim() || !formData.project || !formData.message.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.project || !formData.budget || !formData.message.trim()) {
       setSubmitStatus('error');
       return;
     }
@@ -134,6 +166,7 @@ ${data.message}
           name: '',
           email: '',
           project: '',
+          budget: '',
           message: ''
         });
         setSubmitStatus('idle');
@@ -333,6 +366,68 @@ ${data.message}
                         className="w-full px-4 py-3 text-left text-obsidian hover:bg-midnight/5 focus:bg-midnight/5 focus:outline-none transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl"
                         role="option"
                         aria-selected={formData.project === option.value}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
+            {/* Budget Dropdown */}
+            <div className="relative mb-6" ref={budgetDropdownRef}>
+              <label htmlFor="budget" className="block text-sm font-medium text-obsidian mb-2">
+                Available Budget *
+              </label>
+              <button
+                type="button"
+                onClick={toggleBudgetDropdown}
+                className={`w-full text-left transition-all duration-300 flex items-center justify-between ${
+                  submitStatus === 'error' && !formData.budget 
+                    ? 'border-red-300 focus:border-red-400' 
+                    : 'focus:border-midnight'
+                }`}
+                disabled={isSubmitting}
+                aria-expanded={isBudgetDropdownOpen}
+                aria-haspopup="listbox"
+                id="budget"
+              >
+                <span className={formData.budget ? 'text-obsidian' : 'text-gunmetal'}>
+                  {formData.budget 
+                    ? budgetOptions.find(opt => opt.value === formData.budget)?.label 
+                    : 'Select your budget'
+                  }
+                </span>
+                <motion.div
+                  animate={{ rotate: isBudgetDropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <svg className="w-5 h-5 text-gunmetal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </motion.div>
+              </button>
+              
+              <AnimatePresence>
+                {isBudgetDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 right-0 mt-2 z-50 bg-white/95 backdrop-blur-md border border-silver/30 rounded-xl shadow-2xl overflow-hidden"
+                    role="listbox"
+                    aria-labelledby="budget"
+                  >
+                    {budgetOptions.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleBudgetSelect(option.value)}
+                        className="w-full px-4 py-3 text-left text-obsidian hover:bg-midnight/5 focus:bg-midnight/5 focus:outline-none transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl"
+                        role="option"
+                        aria-selected={formData.budget === option.value}
                       >
                         {option.label}
                       </button>
