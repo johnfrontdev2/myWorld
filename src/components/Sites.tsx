@@ -148,7 +148,7 @@ const ProjectCard = React.memo<{ project: Project; index: number }>(({ project, 
             />
             
             {/* RGB Overlay otimizado */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-95 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 via-purple-500/4 to-pink-500/8 mix-blend-overlay" />
             </div>
             
